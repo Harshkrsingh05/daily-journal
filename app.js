@@ -34,6 +34,8 @@ app.get("/about", function(req, res){
 app.get("/contact", function(req, res){
   res.render("contact",{conContent: contactContent});
 });
+// this buttons are not working currently.
+// I am working on it.
 app.get("/compose", function(req, res){
   res.render("compose");
 });
