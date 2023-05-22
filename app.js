@@ -35,7 +35,7 @@ app.get("/contact", function(req, res){
   res.render("contact",{conContent: contactContent});
 });
 // this buttons are not working currently.
-// I am working on it.
+// I am working on it, adding button on home page so user get redirected to compose page.
 app.get("/compose", function(req, res){
   res.render("compose");
 });
