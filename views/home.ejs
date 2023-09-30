@@ -1,16 +1,26 @@
 <%- include('partials/header'); -%>
 
-
-<h1>Home</h1>
-<p><%=StartingContent%></p>
+<div class="container">
+<h1 class="mx-2">Home</h1>
+<p class="mx-2"><%=StartingContent%></p>
 
 <!-- for ( var i=0;i<posts.length; i++){  -->
-<%posts.forEach(function(post){%>
-  <h1><%=post.title%></h1>
-  <p><%=post.content.substring(0, 100)+ " ..."%>
-  <a href="/posts/<%=post.title%>">Read More</a>
-  </p>
-<%})%>
+<%blogs.forEach(function(blog){%>
+  <h1 class="mx-2"><%=blog.title%>
+  </h1>
+  
+  <% if (blog.post) { %>
+    <p class="mx-2"><%= blog.post.substring(0, 100) + " ..." %></p>
+  <% } else { %>
+    <p class="mx-2">No content available.</p>
+  <% } %>
+  <a class="mx-2" href="/posts/<%=blog.title%>">Read More</a>
+  <form class="mx-2" method="POST" action="/delete/<%= blog._id %>" style="display:inline;">
+    <button type="submit">Delete<span><i class="fa-solid fa-trash fa-xs"></i></span></button>
+  </form>
+ <%})%>
+</div>
+ <!-- <div><button><a href="/compose">Compose</a> </button></div> -->
 
 
 
