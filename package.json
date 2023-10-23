@@ -20,6 +20,8 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mongoose": "^7.0.2",
+    "mongoosh": "^0.0.7",
+    "node": "^21.0.0",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
