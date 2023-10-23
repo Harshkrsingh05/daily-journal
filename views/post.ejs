@@ -1,9 +1,13 @@
 <%- include('partials/header'); -%>
 
 
-<div class="postwindow">
-<h1><%=title %></h1>
-<p><%=content %></p>
+<div class="container rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
+  <% if (user && user.id === post.user.toString()) { %>
+    <h1><%= title %></h1>
+    <p><%= content %></p>
+  <% } else { %>
+    <p>You do not have permission to access this post.</p>
+  <% } %>
 </div>
 
 

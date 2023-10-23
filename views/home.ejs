@@ -1,26 +1,34 @@
 <%- include('partials/header'); -%>
 
-<div class="container">
+<div class="container rounded shadow-lg" style="min-height: 90vh; 
+/* background-image: linear-gradient(#dbdcdc ,#E4EfE9 ); */
+">
 <h1 class="mx-2">Home</h1>
-<p class="mx-2"><%=StartingContent%></p>
+<p class="mx-2">Welcome, <%= user%></p>
+<p class="mx-2"><%- StartingContent %></p>
+<div class="random-quote mx-2">
+  <h4>Quote of the day</h4>
+  <p><%= randomQuote.text %></p>
+  <p><em>- <%= randomQuote.author || 'Unknown' %></em></p>
+</div>
 
 <!-- for ( var i=0;i<posts.length; i++){  -->
 <%blogs.forEach(function(blog){%>
   <h1 class="mx-2"><%=blog.title%>
   </h1>
-  
+  <p class="mx-2">Posted on <%= blog.timestamp ? blog.timestamp.toLocaleString() : 'No timestamp available' %></p>  
   <% if (blog.post) { %>
     <p class="mx-2"><%= blog.post.substring(0, 100) + " ..." %></p>
   <% } else { %>
     <p class="mx-2">No content available.</p>
   <% } %>
-  <a class="mx-2" href="/posts/<%=blog.title%>">Read More</a>
+  <a class="mx-2" href="/posts/<%=blog.title%>/<%= blog._id %>">Read More</a>
   <form class="mx-2" method="POST" action="/delete/<%= blog._id %>" style="display:inline;">
     <button type="submit">Delete<span><i class="fa-solid fa-trash fa-xs"></i></span></button>
   </form>
  <%})%>
 </div>
- <!-- <div><button><a href="/compose">Compose</a> </button></div> -->
+ 
 
 
 
