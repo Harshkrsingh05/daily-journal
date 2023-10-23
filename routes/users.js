@@ -3,9 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var jwt = require('jsonwebtoken');
-
 // Load User model
-const keys = require("../config/keys");
 const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
 

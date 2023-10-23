@@ -8,13 +8,13 @@ require("dotenv").config();
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const keys = require("./config/keys");
+
 
 
 
 const app = express();
 require('./config/passport')(passport);
-const db = require('./config/keys').mongoURI;
+const db = process.env.mongoURI;
 mongoose
   .connect(
     db,
@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(
   session({
-    secret: keys.secretOrKey,
+    secret: process.env.secretOrKey,
     resave: true,
     saveUninitialized: true
   })
