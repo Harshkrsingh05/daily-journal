@@ -1,20 +1,21 @@
 <%- include('partials/header'); -%>
 <div class="container min-vh-80"style="min-height: 80vh;">
 <h1>Compose</h1>
-<form class="" action="/" method="post">
+<form class="" method="post">
 
   <label >Title</label>
   <div class="form-group">
-    <input type="text" name="userinputTitle" value="">
+    <input class="rounded shadow-lg" type="text" name="userinputTitle" value="">
   </div>
 
 
   <label>Post</label>
   <div class="form-group">
-    <textarea name="userinputPost" rows="5" cols="80"></textarea>
+    <textarea class="rounded shadow-lg" name="userinputPost" rows="5" cols="80"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-primary" name="button">Publish</button>
+  <button type="submit" class="btn btn-primary" name="button" formaction="/">Private post</button>
+  <button type="submit" class="btn btn-primary" name="button" formaction="/global">Public post</button>
 
 </form>
 </div>

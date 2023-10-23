@@ -1,0 +1,10 @@
+<%- include('partials/header'); -%>
+
+<div class="container rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
+  <h1><%= title %></h1>
+  <p>Author: <%= author %></p>
+  <p>Posted on: <%= timestamp ? timestamp.toLocaleString() : 'No timestamp available' %></p>
+  <p><%= content %></p>
+</div>
+
+<%- include('partials/footer'); -%>

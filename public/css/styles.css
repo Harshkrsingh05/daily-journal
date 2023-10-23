@@ -1,5 +1,17 @@
-
-
+body{
+    background-image: url('/public/images/notebook2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center;
+    background-size: cover;
+}
+.container.rounded.shadow-lg{
+    background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );
+    /* background-repeat: no-repeat; */
+    /* background-attachment: scroll;
+    background-position: left;
+    background-size: cover; */
+}
 a{
     color: black !important;
 }
@@ -7,15 +19,24 @@ a:hover{
     color: #1abc9c !important;
 }
 
-
-
+.cb1{
+    backdrop-filter: blur(1rem);
+    background-color: rgba(225,225,225,0.1);
+}
+.container.min-vh-80{
+    /* background-image: url("https://wallpaperaccess.com/full/7187387.jpg"); */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    /* color: #fff; */
+}
 .footer {
 	position: relative;
 	text-align: center;
 	bottom: 0;
 	width: 100%;
 	height: 60px;
-	background-color: #1abc9c;
+	background-color:#1c1d1f;
 }
 
 .footer p {

@@ -1,0 +1,33 @@
+<%- include('partials/header'); -%>
+<div class="container" style="min-height: 90vh; background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
+    <h1>Global Posts</h1>
+    <div class="random-quote mx-2">
+        <h4>Quote</h4>
+        <p><%= randomQuote.text %></p>
+        <p><em>- <%= randomQuote.author || 'Unknown' %></em></p>
+      </div>
+    <ul>
+
+        <% blogs.forEach((blog) => { %>
+          <li>
+            <h3><%= blog.title %></h3>
+            <% if (blog.post) { %>
+                <p class="mx-2"><%= blog.post.substring(0, 100) + " ..." %></p>
+              <% } else { %>
+                <p class="mx-2">No content available.</p>
+              <% } %>
+              <a class="mx-2" href="/global/<%=blog.title%>">Read More</a>
+              
+            
+            <!-- Display author name -->
+            <p>Author: <%= blog.user.length > 0 ? blog.user[0].name : 'Unknown' %></p>
+            
+            <!-- Display timestamp (date and time) -->
+            <p>Posted on: <%= blog.timestamp ? blog.timestamp.toLocaleString() : 'No timestamp available' %></p>
+          </li>
+        <% }); %>
+      </ul>
+</div>
+
+
+<%- include('partials/footer'); -%>
