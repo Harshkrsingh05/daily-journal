@@ -1,10 +1,19 @@
-body{
-    background-image: url('/public/images/notebook2.jpg');
+/* body{
+    background-image: url('/public/images/notebook2.jpg'); 
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center;
     background-size: cover;
-}
+} 
+*/
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
 .container.rounded.shadow-lg{
     background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );
     /* background-repeat: no-repeat; */
