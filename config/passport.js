@@ -59,7 +59,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/auth/google/callback',
+        callbackURL: 'https://hkjournal.onrender.com/auth/google/callback',
         passReqToCallback: true,
       },
       function (request, accessToken, refreshToken, profile, done) {
