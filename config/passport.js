@@ -62,24 +62,32 @@ module.exports = function (passport) {
         callbackURL: '/auth/google/callback',
         passReqToCallback: true,
       },
-      function (request, accessToken, refreshToken, profile, done) {
-        console.log('Google OAuth2 Callback function called');
-        
-        // Log relevant information
-        console.log('request:', request);
-        console.log('accessToken:', accessToken);
-        console.log('refreshToken:', refreshToken);
-        console.log('profile:', profile);
-  
-        // Your existing logic for finding or creating a user
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-          if (err) {
-            console.error('Error finding or creating user:', err);
-            return done(err, null);
+      async (accessToken, refreshToken, profile, done) => {
+        //get the user data from google 
+        const newUser = {
+          googleId: profile.id,
+          displayName: profile.displayName,
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          image: profile.photos[0].value,
+          email: profile.emails[0].value
+        }
+
+        try {
+          //find the user in our database 
+          let user = await User.findOne({ googleId: profile.id })
+
+          if (user) {
+            //If user present in our database.
+            done(null, user)
+          } else {
+            // if user is not preset in our database save user data to database.
+            user = await User.create(newUser)
+            done(null, user)
           }
-          console.log('User found or created successfully:', user);
-          return done(null, user);
-        });
+        } catch (err) {
+          console.error(err)
+        }
       }
     )
   );
