@@ -20,7 +20,7 @@
               
             
             <!-- Display author name -->
-            <p>Author: <%= blog.user.length > 0 ? blog.user[0].name : 'Unknown' %></p>
+            <p>Author: <%= blog.user.length > 0 ? blog.user[0].displayName : 'Unknown' %></p>
             
             <!-- Display timestamp (date and time) -->
             <p>Posted on: <%= blog.timestamp ? blog.timestamp.toLocaleString() : 'No timestamp available' %></p>

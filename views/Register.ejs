@@ -5,17 +5,17 @@
   style="min-height: 92vh"
 > <div class=" h-75" style="width: 55%;">
   <form
-    action="/users/register"
+    action="/register"
     method="POST"
     class="shadow-lg rounded cb1"
     style="min-height: 60%; min-width: 30%; background-color: #00000059"
   >
     <div class="form-outline mb-2">
-      <label class="form-label mx-3 my-2" for="name">Name</label>
+      <label class="form-label mx-3 my-2" for="displayName">Name</label>
       <input
-        type="name"
-        id="name"
-        name="name"
+        type="text"
+        id="displayName"
+        name="displayName"
         class="form-control w-75 mx-3"
         placeholder="Enter Name"
         value="<%= typeof name != 'undefined' ? name : '' %>"
@@ -84,21 +84,11 @@
     <div class="text-center">
       <p>Already have account? <a href="./Login">Login</a></p>
       <p>or sign up with:</p>
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-facebook-f"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-google"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-twitter"></i>
-      </button>
-
-      <button type="button" class="btn btn-link btn-floating mx-1">
-        <i class="fab fa-github"></i>
-      </button>
+      <div class="d-flex  justify-content-center">
+        <a href="/auth/google" class="bg-light text-decoration-none px-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google mx-1 my-2" viewBox="0 0 16 16">
+          <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+        </svg>Sign in with Google</a>
+      </div>
     </div>
   </form>
 </div>
