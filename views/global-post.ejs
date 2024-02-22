@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<div class="container rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
+<div class="mx-4 my-2 py-2 px-3 rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
   <h1><%= title %></h1>
   <p>Author: <%= author %></p>
   <p>Posted on: <%= timestamp ? timestamp.toLocaleString() : 'No timestamp available' %></p>

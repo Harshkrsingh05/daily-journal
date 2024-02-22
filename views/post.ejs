@@ -1,10 +1,12 @@
 <%- include('partials/header'); -%>
 
 
-<div class="container rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
+<div class="mx-4 my-2 rounded shadow-lg postwindow" style="min-height: 85vh;background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );">
   <% if (user && user.id === post.user.toString()) { %>
+    <div class="mx-2 py-3">
     <h1><%= title %></h1>
     <p><%= content %></p>
+  </div>
   <% } else { %>
     <p>You do not have permission to access this post.</p>
   <% } %>
