@@ -6,6 +6,71 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const Blog = require('../models/Blog');
 const Global=require('../models/Global');
+const User=require('../models/User');
+const passport = require('passport');
+
+//User route
+
+// Welcome Page
+router.get('/', forwardAuthenticated, (req, res) => res.render('welcome',{user:req.user}));
+// Login Page
+router.get('/login', forwardAuthenticated, (req, res) => res.render('Login'));
+// Local login
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/login',
+  failureFlash: true 
+}));
+
+
+// Google authentication
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true  }),
+  (req, res) => {
+    res.redirect('/home');
+  }
+);
+// // Dashboard
+// router.get('/home', ensureAuthenticated, (req, res) =>
+//   res.render('home', {
+//     user: req.user
+//   })
+// );
+
+// Registration Page
+router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+
+// Process Registration
+router.post('/register', async (req, res) => {
+  try {
+    const { displayName, email, password  } = req.body;
+    const user = new User({ displayName,email, password });
+    await user.save();
+    res.redirect('/home');
+    // if (user) {
+    //   // User already exists, handle accordingly (e.g., display error message)
+    //   req.flash('error_msg', 'Email already registered');
+    //   res.redirect('/register');
+    // } else {
+    //   // Create new user
+    //   const newUser = new User({ email, password, displayName });
+    //   await newUser.save();
+    //   req.flash('success_msg', 'You are now registered and can log in');
+    //   res.redirect('/login');
+    // }
+  } catch (error) {
+    console.error(error);
+    res.redirect('/register');
+  }
+});
+
+
+
+
 // Welcome Page
 
 
@@ -23,7 +88,7 @@ const defaultdjLists=djList1;
 let posts=[];
 //
 
-router.get("/",ensureAuthenticated, async function(req, res){
+router.get("/home",ensureAuthenticated, async function(req, res){
   const isLoggedIn = req.isAuthenticated();
     try {
     const foundBlogs = await Blog.find({user: req.user.id}).exec();
@@ -37,21 +102,11 @@ router.get("/",ensureAuthenticated, async function(req, res){
         // Assuming data is an array of quotes
         const randomQuote = data[Math.floor(Math.random() * data.length)];
 
-      // const newBlog = new Blog({
-      //   title: "Sample Title",
-      //   post: "Sample Post"
-      // })
-      // await newBlog.save();
-      // console.log("Successfully saved a sample blog to DB.");
-      res.render("home", { StartingContent: StartingContent, posts: posts,blogs: foundBlogs,user:req.user.name,isLoggedIn: isLoggedIn,randomQuote: randomQuote  });
+      res.render("home", { StartingContent: StartingContent, posts: posts,blogs: foundBlogs,user:req.user,isLoggedIn: isLoggedIn,randomQuote: randomQuote  });
       
     })
   }
-    else {
-      
-        res.render("/users/login");
-      
-    }
+
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -72,7 +127,7 @@ router.get("/compose",ensureAuthenticated, function(req, res){
 });
 router.get('/global',async (req, res) => {
   try {
-    const foundGlobalBlogs = await Global.find({}).populate('user', 'name');
+    const foundGlobalBlogs = await Global.find({}).populate('user', 'displayName');
     const api_url = "https://type.fit/api/quotes";
       fetch(api_url)
       .then(function (response) {
@@ -134,12 +189,6 @@ router.post('/global', async (req, res) => {
   }
 });
 
-router.get("/users/login", function(req, res){
-  res.render("Login");
-});
-router.get("/register", function(req, res){
-  res.render("Register");
-});
 
 router.get('/global/:postname', async (req, res) => {
   try {
@@ -152,7 +201,7 @@ router.get('/global/:postname', async (req, res) => {
       res.render('global-post', {
         title: foundGlobalPost.title,
         content: foundGlobalPost.post,
-        author: foundGlobalPost.user[0].name, // Assuming user has a 'name' property
+        author: foundGlobalPost.user[0].displayName, // Assuming user has a 'name' property
         timestamp: foundGlobalPost.timestamp,
       });
     } else {
@@ -208,5 +257,16 @@ router.post("/delete/:postId", async function (req, res) {
     res.status(500).send("Internal Server Error");
   }
 });
+
+router.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error(err);
+    }
+    res.redirect('/');
+    req.flash('success_msg', 'You are logged out');
+  });
+});
+
 
 module.exports = router;
