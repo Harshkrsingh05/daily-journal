@@ -13,7 +13,9 @@
     min-width: 100%;
     min-height: 100%;
   }
-  
+.mx-4.my-2.rounded.shadow-lg{
+    background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );
+}  
 .container.rounded.shadow-lg{
     background-image: linear-gradient(#B7E9F7,#DBF3FA,#F5FCFF );
     /* background-repeat: no-repeat; */
@@ -53,3 +55,13 @@ a:hover{
 	font-size: 12px;
   color: #fff;
 }
+@media screen and (max-width: 768px) {
+    /* Adjust font sizes for better readability on mobile devices */
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 1.5rem; /* Adjust as needed */
+    }
+    
+    p {
+      font-size: 1.2rem; /* Adjust as needed */
+    }
+  }
