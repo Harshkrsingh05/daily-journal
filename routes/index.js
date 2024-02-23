@@ -14,7 +14,7 @@ const passport = require('passport');
 // Welcome Page
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome',{user:req.user}));
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('Login'));
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // Local login
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/home',
